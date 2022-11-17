@@ -7,7 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RoleSeeder extends Seeder
+class RoleUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,25 +16,24 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        //insert seed data into database
-        DB::table('roles')->insert([
-           'name' =>  'User Administrator',
-            'description' => 'admin roles',
+        // populate database
+        DB::table('role_user')->insert([
+            'user_id' =>  '1',
+            'role_id' => '1',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
-        DB::table('roles')->insert([
-            'name' =>  'Moderator',
-            'description' => 'moderator roles',
+        DB::table('role_user')->insert([
+            'user_id' =>  '2',
+            'role_id' => '2',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
-        DB::table('roles')->insert([
-            'name' =>  'Theme Manager',
-            'description' => 'theme manager roles',
+        DB::table('role_user')->insert([
+            'user_id' =>  '3',
+            'role_id' => '3',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
-
     }
 }
