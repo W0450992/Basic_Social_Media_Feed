@@ -99,7 +99,19 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        //validation
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'unique:users,email' . $user->id,'max:255'],
+//            'password' => ['required', 'max:255']
+            // 'role'
+        ]);
+        //save changes
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save(); // perform a sql UPDATE
+
+        return redirect(route('users.index'))->with('status', 'User has been changed!');
     }
 
     /**
