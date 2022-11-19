@@ -59,7 +59,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make( $request->password)
 
-        ]);
+        ])->roles()->sync($request->role_ids);
         // ask controller to redirect back to index route
         // gets updated list
         return redirect(route('users.index'))->with('status', 'User has been added!');
