@@ -9,7 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    function user(){
-        return $this->belongsTo(User::class);
+    function user(){//singular
+        return $this->belongsTo(User::class); //One to many child
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,6 +17,10 @@ class UserController extends Controller
     public function index()
     {
         //
+        //orders by name in table
+        $users =  User::with('roles')->get(); //orderBy('name')->get();//all();
+        //need to create a view in resources folder called index.blade.php
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -25,6 +31,9 @@ class UserController extends Controller
     public function create()
     {
         //
+        $users = User::orderBy('name')->get();
+        $roles = Role::orderBy('name')->get();
+        return view('users.create', compact(['users','roles']));
     }
 
     /**
@@ -36,6 +45,24 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'unique:users,email','max:255'],
+            'password' => ['required', 'max:255']
+           // 'role'
+        ]);
+
+        //puts new record in database
+        //save the data as a new country
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make( $request->password)
+
+        ]);
+        // ask controller to redirect back to index route
+        // gets updated list
+        return redirect(route('users.index'))->with('status', 'User has been added!');
     }
 
     /**
@@ -47,6 +74,8 @@ class UserController extends Controller
     public function show(User $user)
     {
         //
+        $userFound = User::find($user->id);
+        return view('users.show', compact('userFound'));
     }
 
     /**
@@ -58,6 +87,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
+        return view('users.edit',compact('user'));
     }
 
     /**
@@ -81,5 +111,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+        $user->delete();
+        return redirect(route('users.index'))->with('status', 'User has been deleted!');
     }
 }
