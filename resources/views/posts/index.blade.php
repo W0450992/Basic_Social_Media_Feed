@@ -22,7 +22,7 @@
 
                                     @if($post->created_by == $user->id)
                                     <div class = "card">
-                                        <div class = "card-header">{{"Posted " . $post->created_at . " by " . $user->name}}</div>
+                                        <div class = "card-header">{{"Posted " . $post->created_at->diffForHumans() . " by " . $user->name}}</div>
                                         <div class = "card-body"><h4>{{$post->contents . "\n"}}</h4></p>
                                         <div >{{$post->title . "\n"}}</div>
                                         <div class = "card-body"><a class="btn btn-warning btn-group"  href="{{route('posts.edit', $post->id)}}">Edit</a></div>
