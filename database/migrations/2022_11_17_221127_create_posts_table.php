@@ -17,11 +17,11 @@ return new class extends Migration
             //define columns
             $table->id();
             $table->string('title');
-            $table->string('content');
+            $table->string('contents');
             $table->foreignId('created_by');
-            $table->foreignId('deleted_by');
+            $table->foreignId('deleted_by')->nullable();
             $table->timestamps();
-            $table->timestamp('deleted_at');
+            $table->timestamp('deleted_at')->nullable();
             //define constraints
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('deleted_by')->references('id')->on('users');
