@@ -24,6 +24,24 @@ class User extends Authenticatable
     }
 
 
+    function isUserAdmin(){
+        foreach($this->roles as $role){
+            if($role->id == 1){
+                return true;
+            }
+        }
+        return false;
+    }
+
+//    function isModerator(){
+//        foreach($this->roles as $role){
+//            if($role->id == 2){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
 
     /**
      * The attributes that are mass assignable.
