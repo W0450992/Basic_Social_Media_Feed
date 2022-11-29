@@ -22,10 +22,10 @@
 
                                     @if($post->created_by == $user->id)
                                     <div class = "card">
-                                        <div class = "card-body">{{"Posted " . $post->created_at . " by " . $user->name}}</div>
+                                        <div class = "card-header">{{"Posted " . $post->created_at . " by " . $user->name}}</div>
                                         <div class = "card-body"><h4>{{$post->contents . "\n"}}</h4></p>
                                         <div >{{$post->title . "\n"}}</div>
-                                        <div><a class="btn btn-warning btn-group"  href="{{route('posts.edit', $post->id)}}">Edit</a></div>
+                                        <div class = "card-body"><a class="btn btn-warning btn-group"  href="{{route('posts.edit', $post->id)}}">Edit</a></div>
                                         <form method ="POST" action="{{route('posts.destroy', $post->id) }}" >
                                             @csrf
                                             @method('DELETE')
