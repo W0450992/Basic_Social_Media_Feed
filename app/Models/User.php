@@ -33,6 +33,14 @@ class User extends Authenticatable
         return false;
     }
 
+    function createdThemes(){
+        return $this->hasMany(Theme::class, 'created_by');
+    }
+
+    function updatedThemes(){
+        return $this->hasMany(Theme::class, 'updated_by');
+    }
+
 //    function isModerator(){
 //        foreach($this->roles as $role){
 //            if($role->id == 2){

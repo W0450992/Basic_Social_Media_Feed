@@ -24,3 +24,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('users', App\Http\Controllers\UserController::class)->middleware('is.admin');
 Route::resource('posts', App\Http\Controllers\PostController::class);
+Route::resource('themes', \App\Http\Controllers\ThemeController::class);
