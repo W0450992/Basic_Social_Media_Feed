@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ThemeController extends Controller
 {
+
+// another way to apply middleware
+//    public function __construct(){
+//        $this->middleware('auth'); // force login
+//        $this->middleware('is.theme.manager'); // check is theme manager
+//    }
+
     /**
      * Display a listing of the resource.
      *

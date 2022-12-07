@@ -33,6 +33,16 @@ class User extends Authenticatable
         return false;
     }
 
+    function isThemeManager(){
+        foreach($this->roles as $role){
+            if($role->id == 3){ // 3 = theme manager
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     function createdThemes(){
         return $this->hasMany(Theme::class, 'created_by');
     }

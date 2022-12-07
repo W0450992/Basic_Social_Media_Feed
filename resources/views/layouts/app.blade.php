@@ -14,7 +14,9 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
+
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{$selectedTheme->cdn_url}}">
 </head>
 <body>
     <div id="app">
@@ -26,6 +28,26 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <!-- Example split danger button -->
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary btn-sm">{{$selectedTheme->name}}</button>
+                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        @foreach($themes as $theme)
+                            <li>
+                                <a class="dropdown-item" href="{{route('changetheme', $theme->id)}}">
+                                    @if($theme->id == $selectedTheme->id)&checkmark;
+                                    @endif
+                                    {{$theme->name}}
+                                </a>
+                            </li>
+                        @endforeach
+
+
+                    </ul>
+                </div>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -51,7 +73,12 @@
                         @else
                             @if(Auth::user()->isUserAdmin())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('users.index') }}">{{ __('User Admin Page') }}</a>
+                                    <a class="nav-link" href="{{ route('users.index') }}">{{ __('Manage Users') }}</a>
+                                </li>
+                            @endif
+                            @if(Auth::user()->isThemeManager())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('themes.index') }}">{{ __('Manage Themes') }}</a>
                                 </li>
                             @endif
 
