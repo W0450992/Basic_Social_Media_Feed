@@ -17,7 +17,7 @@
 
                         <div>
 
-                            @foreach($users as $user)
+        {{dd($posts)}}
                                 @foreach($posts as $post)
 
                                     @if($post->created_by == $user->id)
@@ -40,7 +40,6 @@
                                     </div>
                                     @endif
                                     @endforeach
-                                        @endforeach
 
 
                         </div>

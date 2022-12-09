@@ -16,8 +16,11 @@ class User extends Authenticatable
 //    protected $fillable = ['name', 'email', 'password'];
 
     //function
-    function posts(){
-        return $this->hasMany(Post::class);// one to many parent
+    function createdPosts(){
+        return $this->hasMany(Post::class, 'created_by');// one to many parent
+    }
+    function updatedPosts(){
+        return $this->hasMany(Post::class, 'updated_by');// one to many parent
     }
     function roles(){
         return $this->belongsToMany(Role::class);//many to many

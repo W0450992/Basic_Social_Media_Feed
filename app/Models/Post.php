@@ -11,8 +11,11 @@ class Post extends Model
     use HasFactory;
     use SoftDeletes;
 
-    function user(){//singular
-        return $this->belongsTo(User::class); //One to many child
+    function createdBy(){//singular
+        return $this->belongsTo(User::class,"created_by"); //One to many child
+    }
+    function updatedBy(){
+        return $this->belongsTo(User::class, "updated_by");
     }
 
     protected $fillable = [

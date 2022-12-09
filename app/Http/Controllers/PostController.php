@@ -20,6 +20,7 @@ class PostController extends Controller
         $posts = Post::OrderBy('created_at','DESC')->get();
         $users = User::OrderBy('id')->get();
         $auth = Auth::user();
+        //dd($posts);
 
         return view('home', compact(['posts','users', 'auth']));
     }
